@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+
+/* 🌈 Animated Background */
+body {
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    text-align:center;
+    overflow:hidden;
+    background: linear-gradient(-45deg, #ff4e50, #fc913a, #f9d423, #ff4e50);
+    background-size: 400% 400%;
+    animation: gradientBG 8s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* 💕 Floating Hearts */
+.heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 24px;
+    animation: floatUp 6s linear infinite;
+    color: white;
+}
+
+@keyframes floatUp {
+    0% {transform: translateY(0);}
+    100% {transform: translateY(-800px);}
+}
+
+.container {
+    margin-top:150px;
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    display:inline-block;
+    box-shadow:0 0 30px rgba(0,0,0,0.3);
+}
+
+input {
+    display:block;
+    margin:15px auto;
+    padding:12px;
+    width:220px;
+    border-radius:20px;
+    border:2px solid pink;
+}
+
+button {
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:25px;
+    background:#ff2e63;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover {
+    transform:scale(1.1);
+    background:#ff0055;
+}
+
+.hidden {
+    display:none;
+}
+
+img {
+    width:250px;
+    margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+    
+
+<!-- 💖 Login Page -->
+<div class="container" id="loginPage">
+    <h2>💘 Valentine Login 💘</h2>
+    <input type="text" id="username" placeholder="Enter your name">
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- 💌 Question Page -->
+<div class="container hidden" id="questionPage">
+    <h2>Are you my Valentine? 💖</h2>
+    <button onclick="yesAnswer()">YES 💕</button>
+    <button id="noBtn" onmouseover="moveNo()">NO 💔</button>
+</div>
+
+<!-- 🎁 Surprise Page -->
+<div class="container hidden" id="surprisePage">
+    <h2>Yayyyyy! 💞</h2>
+    <h3>You are my Valentine Forever 💖✨</h3>
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+    <p>Unlimited love, hugs & chocolates for you 😘🍫</p>
+</div>
+
+<script>
+
+/* 💖 Login Function */
+function login() {
+    var user = document.getElementById("username").value;
+    var pass = document.getElementById("password").value;
+
+    if(user.trim() !== "" && pass.trim() !== "") {
+        document.getElementById("loginPage").classList.add("hidden");
+        document.getElementById("questionPage").classList.remove("hidden");
+    } else {
+        alert("Enter details first 😏");
+    }
+}
+
+/* 💘 YES */
+function yesAnswer() {
+    document.getElementById("questionPage").classList.add("hidden");
+    document.getElementById("surprisePage").classList.remove("hidden");
+}
+
+/* 😈 NO Button Runs */
+function moveNo() {
+    var btn = document.getElementById("noBtn");
+    var x = Math.random() * window.innerWidth - 100;
+    var y = Math.random() * window.innerHeight - 100;
+    btn.style.position = "absolute";
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+
+/* 💕 Floating Hearts Generator */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+
+setInterval(createHeart, 300);
+
+</script>
+
+</body>
+
+</html>
